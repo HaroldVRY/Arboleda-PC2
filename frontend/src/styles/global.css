@@ -380,6 +380,102 @@ label {
   color: var(--primary);
 }
 
+/* ── Chip / selection buttons (operadores, montos rápidos, cuentas) ── */
+
+.chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.chip-btn {
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--text);
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.chip-btn:hover {
+  border-color: var(--primary-light);
+}
+
+.chip-btn.selected {
+  border-color: var(--primary);
+  background: rgba(26, 58, 107, 0.06);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.chip-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Step actions row ── */
+.step-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+/* ── Success screen ── */
+.success-screen {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.success-screen .success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--success-bg);
+  border: 2px solid #86efac;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 20px;
+  color: var(--success);
+}
+
+.success-screen h2 {
+  color: var(--success);
+  font-size: 22px;
+  margin: 0 0 24px;
+}
+
+/* ── Summary box (paso 4) ── */
+.summary-box {
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.summary-box .summary-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.summary-box .summary-row span:first-child {
+  color: var(--text-muted);
+}
+
+.summary-box .summary-row span:last-child {
+  font-weight: 500;
+}
+
 /* ── Utilities ── */
 
 .text-muted {
