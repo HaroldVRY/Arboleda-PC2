@@ -476,6 +476,98 @@ label {
   font-weight: 500;
 }
 
+/* ── Spinner ── */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.spinner-sm {
+  width: 14px;
+  height: 14px;
+}
+
+.loading-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+/* ── Step card ── */
+
+.step-card      { max-width: 480px; }
+.step-card-wide { max-width: 520px; }
+
+/* ── Responsive — móvil (≤ 640 px) ── */
+
+@media (max-width: 640px) {
+  .container {
+    padding: 20px 16px;
+  }
+
+  .header {
+    padding: 0 16px;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 56px;
+    gap: 8px;
+    padding-block: 10px;
+  }
+
+  .brand { font-size: 17px; }
+
+  .page-header h1 { font-size: 20px; }
+
+  .step-card,
+  .step-card-wide {
+    max-width: 100%;
+  }
+
+  .step-indicator .dot {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chip-btn {
+    padding: 9px 14px;
+    font-size: 14px;
+  }
+
+  .login-box {
+    padding: 28px 20px;
+  }
+
+  /* En móvil los botones de navegación se apilan:
+     el botón primario queda arriba (column-reverse) */
+  .step-actions {
+    flex-direction: column-reverse;
+  }
+
+  .step-actions .btn {
+    width: 100%;
+  }
+}
+
 /* ── Utilities ── */
 
 .text-muted {

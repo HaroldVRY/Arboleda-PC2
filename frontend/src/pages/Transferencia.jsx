@@ -49,26 +49,18 @@ export default function Transferencia() {
     setCuentasError('')
     listCuentas()
       .then((data) => setCuentas(data.cuentas))
-      .catch(() => setCuentasError('No se pudieron cargar las cuentas.'))
+      .catch(() => setCuentasError('No se pudieron cargar las cuentas. Intenta de nuevo.'))
       .finally(() => setCuentasLoading(false))
   }, [paso])
 
-  // Si se cambia el origen y coincide con el destino, limpiar destino
   function handleOrigenChange(id) {
     setOrigenId(id)
     if (id === destinoId) setDestinoId('')
     setCuentasSeleccionError('')
   }
 
-  function avanzar() {
-    setSubmitError('')
-    setPaso((p) => p + 1)
-  }
-
-  function retroceder() {
-    setSubmitError('')
-    setPaso((p) => p - 1)
-  }
+  function avanzar() { setSubmitError(''); setPaso((p) => p + 1) }
+  function retroceder() { setSubmitError(''); setPaso((p) => p - 1) }
 
   function handlePaso1() {
     if (!origenId || !destinoId) {
@@ -107,7 +99,7 @@ export default function Transferencia() {
       setMensajeExito(data.mensaje)
       setPaso(4)
     } catch (err) {
-      const msg = err.response?.data?.error?.message || 'Error al procesar la transferencia.'
+      const msg = err.response?.data?.error?.message || 'Ocurrió un error al procesar la transferencia. Intenta de nuevo.'
       setSubmitError(msg)
     } finally {
       setSubmitting(false)
@@ -128,14 +120,17 @@ export default function Transferencia() {
 
       {/* ── PASO 1: Seleccionar cuentas ── */}
       {paso === 1 && (
-        <div className="card" style={{ maxWidth: 520 }}>
+        <div className="card step-card-wide">
           <h2 style={{ marginTop: 0, marginBottom: 20, fontSize: 17 }}>
             Paso 1 — Selecciona las cuentas
           </h2>
           {cuentasError && <Alert type="error">{cuentasError}</Alert>}
           {cuentasSeleccionError && <Alert type="error">{cuentasSeleccionError}</Alert>}
           {cuentasLoading ? (
-            <p className="text-muted">Cargando cuentas…</p>
+            <div className="loading-row">
+              <span className="spinner" />
+              <span>Cargando cuentas…</span>
+            </div>
           ) : (
             <>
               <label style={{ fontSize: 14, fontWeight: 500, display: 'block', marginBottom: 10 }}>
@@ -188,12 +183,7 @@ export default function Transferencia() {
             </>
           )}
           <div className="step-actions">
-            <Button
-              variant="primary"
-              onClick={handlePaso1}
-              disabled={!origenId || !destinoId}
-              full
-            >
+            <Button variant="primary" onClick={handlePaso1} disabled={!origenId || !destinoId} full>
               Siguiente
             </Button>
           </div>
@@ -202,23 +192,14 @@ export default function Transferencia() {
 
       {/* ── PASO 2: Monto ── */}
       {paso === 2 && (
-        <div className="card" style={{ maxWidth: 480 }}>
+        <div className="card step-card">
           <h2 style={{ marginTop: 0, marginBottom: 20, fontSize: 17 }}>
             Paso 2 — Monto a transferir
           </h2>
           <div className="summary-box" style={{ marginBottom: 20 }}>
-            <div className="summary-row">
-              <span>Origen</span>
-              <span>{cuentaOrigen?.alias || cuentaOrigen?.numero_cuenta}</span>
-            </div>
-            <div className="summary-row">
-              <span>Saldo disponible</span>
-              <span>{formatSaldo(cuentaOrigen?.saldo, cuentaOrigen?.moneda)}</span>
-            </div>
-            <div className="summary-row">
-              <span>Destino</span>
-              <span>{cuentaDestino?.alias || cuentaDestino?.numero_cuenta}</span>
-            </div>
+            <div className="summary-row"><span>Origen</span><span>{cuentaOrigen?.alias || cuentaOrigen?.numero_cuenta}</span></div>
+            <div className="summary-row"><span>Saldo disponible</span><span>{formatSaldo(cuentaOrigen?.saldo, cuentaOrigen?.moneda)}</span></div>
+            <div className="summary-row"><span>Destino</span><span>{cuentaDestino?.alias || cuentaDestino?.numero_cuenta}</span></div>
           </div>
           <Input
             id="monto"
@@ -233,12 +214,7 @@ export default function Transferencia() {
           />
           <div className="step-actions">
             <Button variant="outline" onClick={retroceder}>Atrás</Button>
-            <Button
-              variant="primary"
-              onClick={handlePaso2}
-              disabled={!monto || Number(monto) <= 0}
-              full
-            >
+            <Button variant="primary" onClick={handlePaso2} disabled={!monto || Number(monto) <= 0} full>
               Siguiente
             </Button>
           </div>
@@ -247,24 +223,15 @@ export default function Transferencia() {
 
       {/* ── PASO 3: Clave online ── */}
       {paso === 3 && (
-        <div className="card" style={{ maxWidth: 480 }}>
+        <div className="card step-card">
           <h2 style={{ marginTop: 0, marginBottom: 20, fontSize: 17 }}>
             Paso 3 — Confirmar con clave online
           </h2>
 
           <div className="summary-box">
-            <div className="summary-row">
-              <span>Origen</span>
-              <span>{cuentaOrigen?.alias || cuentaOrigen?.numero_cuenta}</span>
-            </div>
-            <div className="summary-row">
-              <span>Destino</span>
-              <span>{cuentaDestino?.alias || cuentaDestino?.numero_cuenta}</span>
-            </div>
-            <div className="summary-row">
-              <span>Monto</span>
-              <span>S/ {Number(monto).toFixed(2)}</span>
-            </div>
+            <div className="summary-row"><span>Origen</span><span>{cuentaOrigen?.alias || cuentaOrigen?.numero_cuenta}</span></div>
+            <div className="summary-row"><span>Destino</span><span>{cuentaDestino?.alias || cuentaDestino?.numero_cuenta}</span></div>
+            <div className="summary-row"><span>Monto</span><span>S/ {Number(monto).toFixed(2)}</span></div>
           </div>
 
           {submitError && <Alert type="error">{submitError}</Alert>}
@@ -287,7 +254,9 @@ export default function Transferencia() {
               disabled={!claveOnline.trim() || submitting}
               full
             >
-              {submitting ? 'Procesando…' : 'Confirmar transferencia'}
+              {submitting
+                ? <><span className="spinner spinner-sm" style={{ marginRight: 6 }} />Procesando…</>
+                : 'Confirmar transferencia'}
             </Button>
           </div>
         </div>
@@ -295,7 +264,7 @@ export default function Transferencia() {
 
       {/* ── PASO 4: Éxito ── */}
       {paso === 4 && (
-        <div className="card" style={{ maxWidth: 480 }}>
+        <div className="card step-card">
           <div className="success-screen">
             <div className="success-icon">✓</div>
             <h2>{mensajeExito || 'Transferencia realizada con éxito.'}</h2>

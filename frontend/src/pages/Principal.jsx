@@ -37,12 +37,14 @@ function formatSaldo(saldo, moneda = 'PEN') {
 export default function Principal() {
   const { usuario } = useContext(AuthContext)
   const [cuentas, setCuentas] = useState([])
+  const [cuentasLoading, setCuentasLoading] = useState(true)
   const [cuentasError, setCuentasError] = useState('')
 
   useEffect(() => {
     listCuentas()
       .then((data) => setCuentas(data.cuentas))
-      .catch(() => setCuentasError('No se pudieron cargar las cuentas.'))
+      .catch(() => setCuentasError('No se pudieron cargar las cuentas. Recarga la página.'))
+      .finally(() => setCuentasLoading(false))
   }, [])
 
   return (
@@ -66,32 +68,32 @@ export default function Principal() {
         ))}
       </div>
 
-      <h2
-        style={{
-          fontSize: '18px',
-          fontWeight: '600',
-          color: 'var(--primary)',
-          margin: '0 0 16px',
-        }}
-      >
+      <h2 style={{ fontSize: '18px', fontWeight: '600', color: 'var(--primary)', margin: '0 0 16px' }}>
         Mis cuentas
       </h2>
 
       {cuentasError && <Alert type="error">{cuentasError}</Alert>}
 
-      <div className="card-grid">
-        {cuentas.map((c) => (
-          <div key={c.id} className="card">
-            <div style={{ fontSize: '13px', color: '#6b7280', marginBottom: '6px' }}>
-              {c.alias || c.numero_cuenta}
+      {cuentasLoading ? (
+        <div className="loading-row">
+          <span className="spinner" />
+          <span>Cargando cuentas…</span>
+        </div>
+      ) : (
+        <div className="card-grid">
+          {cuentas.map((c) => (
+            <div key={c.id} className="card">
+              <div style={{ fontSize: '13px', color: '#6b7280', marginBottom: '6px' }}>
+                {c.alias || c.numero_cuenta}
+              </div>
+              <div className="saldo">{formatSaldo(c.saldo, c.moneda)}</div>
+              <div style={{ fontSize: '12px', color: '#9ca3af', marginTop: '10px' }}>
+                N.° {c.numero_cuenta}
+              </div>
             </div>
-            <div className="saldo">{formatSaldo(c.saldo, c.moneda)}</div>
-            <div style={{ fontSize: '12px', color: '#9ca3af', marginTop: '10px' }}>
-              N.° {c.numero_cuenta}
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </Layout>
   )
 }

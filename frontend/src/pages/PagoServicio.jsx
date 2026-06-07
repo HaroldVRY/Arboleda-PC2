@@ -54,7 +54,7 @@ export default function PagoServicio() {
     setServiciosError('')
     listServicios()
       .then((data) => setServicios(data.servicios))
-      .catch(() => setServiciosError('No se pudieron cargar los servicios.'))
+      .catch(() => setServiciosError('No se pudieron cargar los servicios. Intenta de nuevo.'))
       .finally(() => setServiciosLoading(false))
   }, [paso])
 
@@ -67,19 +67,12 @@ export default function PagoServicio() {
         setCuentas(data.cuentas)
         if (data.cuentas.length === 1) setCuentaId(data.cuentas[0].id)
       })
-      .catch(() => setCuentasError('No se pudieron cargar las cuentas.'))
+      .catch(() => setCuentasError('No se pudieron cargar las cuentas. Intenta de nuevo.'))
       .finally(() => setCuentasLoading(false))
   }, [paso])
 
-  function avanzar() {
-    setSubmitError('')
-    setPaso((p) => p + 1)
-  }
-
-  function retroceder() {
-    setSubmitError('')
-    setPaso((p) => p - 1)
-  }
+  function avanzar() { setSubmitError(''); setPaso((p) => p + 1) }
+  function retroceder() { setSubmitError(''); setPaso((p) => p - 1) }
 
   function handlePaso1() {
     if (!servicioId) return
@@ -120,7 +113,7 @@ export default function PagoServicio() {
       setMensajeExito(data.mensaje)
       setPaso(4)
     } catch (err) {
-      const msg = err.response?.data?.error?.message || 'Error al procesar el pago.'
+      const msg = err.response?.data?.error?.message || 'Ocurrió un error al procesar el pago. Intenta de nuevo.'
       setSubmitError(msg)
     } finally {
       setSubmitting(false)
@@ -130,7 +123,6 @@ export default function PagoServicio() {
   const servicioSeleccionado = servicios.find((s) => s.id === servicioId)
   const cuentaSeleccionada = cuentas.find((c) => c.id === cuentaId)
 
-  // Agrupar servicios por categoría para mejor lectura
   const porCategoria = servicios.reduce((acc, s) => {
     if (!acc[s.categoria]) acc[s.categoria] = []
     acc[s.categoria].push(s)
@@ -147,26 +139,23 @@ export default function PagoServicio() {
 
       {/* ── PASO 1: Seleccionar servicio ── */}
       {paso === 1 && (
-        <div className="card" style={{ maxWidth: 520 }}>
+        <div className="card step-card-wide">
           <h2 style={{ marginTop: 0, marginBottom: 20, fontSize: 17 }}>
             Paso 1 — Selecciona el servicio
           </h2>
           {serviciosError && <Alert type="error">{serviciosError}</Alert>}
           {serviciosLoading ? (
-            <p className="text-muted">Cargando servicios…</p>
+            <div className="loading-row">
+              <span className="spinner" />
+              <span>Cargando servicios…</span>
+            </div>
           ) : (
             Object.entries(porCategoria).map(([categoria, lista]) => (
               <div key={categoria} style={{ marginBottom: 20 }}>
-                <p
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 600,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.5px',
-                    color: '#6b7280',
-                    marginBottom: 8,
-                  }}
-                >
+                <p style={{
+                  fontSize: 12, fontWeight: 600, textTransform: 'uppercase',
+                  letterSpacing: '0.5px', color: '#6b7280', marginBottom: 8,
+                }}>
                   {categoria}
                 </p>
                 <div className="chip-grid">
@@ -194,7 +183,7 @@ export default function PagoServicio() {
 
       {/* ── PASO 2: Código, monto y cuenta ── */}
       {paso === 2 && (
-        <div className="card" style={{ maxWidth: 480 }}>
+        <div className="card step-card">
           <h2 style={{ marginTop: 0, marginBottom: 20, fontSize: 17 }}>
             Paso 2 — Código de referencia, monto y cuenta
           </h2>
@@ -226,7 +215,10 @@ export default function PagoServicio() {
           </label>
           {cuentasError && <Alert type="error">{cuentasError}</Alert>}
           {cuentasLoading ? (
-            <p className="text-muted">Cargando cuentas…</p>
+            <div className="loading-row">
+              <span className="spinner" />
+              <span>Cargando cuentas…</span>
+            </div>
           ) : (
             <div className="chip-grid" style={{ flexDirection: 'column' }}>
               {cuentas.map((c) => (
@@ -262,24 +254,15 @@ export default function PagoServicio() {
 
       {/* ── PASO 3: Clave online ── */}
       {paso === 3 && (
-        <div className="card" style={{ maxWidth: 480 }}>
+        <div className="card step-card">
           <h2 style={{ marginTop: 0, marginBottom: 20, fontSize: 17 }}>
             Paso 3 — Confirmar con clave online
           </h2>
 
           <div className="summary-box">
-            <div className="summary-row">
-              <span>Servicio</span>
-              <span>{servicioSeleccionado?.nombre}</span>
-            </div>
-            <div className="summary-row">
-              <span>Referencia</span>
-              <span>{codigoReferencia}</span>
-            </div>
-            <div className="summary-row">
-              <span>Monto</span>
-              <span>S/ {Number(monto).toFixed(2)}</span>
-            </div>
+            <div className="summary-row"><span>Servicio</span><span>{servicioSeleccionado?.nombre}</span></div>
+            <div className="summary-row"><span>Referencia</span><span>{codigoReferencia}</span></div>
+            <div className="summary-row"><span>Monto</span><span>S/ {Number(monto).toFixed(2)}</span></div>
             <div className="summary-row">
               <span>Cuenta</span>
               <span>{cuentaSeleccionada?.alias || cuentaSeleccionada?.numero_cuenta}</span>
@@ -306,7 +289,9 @@ export default function PagoServicio() {
               disabled={!claveOnline.trim() || submitting}
               full
             >
-              {submitting ? 'Procesando…' : 'Confirmar pago'}
+              {submitting
+                ? <><span className="spinner spinner-sm" style={{ marginRight: 6 }} />Procesando…</>
+                : 'Confirmar pago'}
             </Button>
           </div>
         </div>
@@ -314,7 +299,7 @@ export default function PagoServicio() {
 
       {/* ── PASO 4: Éxito ── */}
       {paso === 4 && (
-        <div className="card" style={{ maxWidth: 480 }}>
+        <div className="card step-card">
           <div className="success-screen">
             <div className="success-icon">✓</div>
             <h2>{mensajeExito || 'Pago realizado con éxito.'}</h2>
