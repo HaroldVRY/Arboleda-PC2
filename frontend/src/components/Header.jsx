@@ -10,7 +10,7 @@ export default function Header() {
         {usuario ? (
           <>
             <span className="user">{usuario.nombre}</span>
-            <button className="btn" onClick={logout}>Salir</button>
+            <button className="btn" onClick={logout}>Cerrar sesión</button>
           </>
         ) : (
           <span />

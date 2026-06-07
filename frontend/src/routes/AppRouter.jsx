@@ -8,7 +8,8 @@ import PagoServicio from '../pages/PagoServicio'
 import Transferencia from '../pages/Transferencia'
 
 function PrivateRoute({ children }) {
-  const { token } = useContext(AuthContext)
+  const { token, loading } = useContext(AuthContext)
+  if (loading) return null // espera la re-hidratación del token antes de redirigir
   return token ? children : <Navigate to="/login" replace />
 }
 
