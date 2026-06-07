@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Banco Arboleda | Transferencia entre mis cuentas</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --text: #102033;
+      --muted: #66758a;
+      --primary: #113b63;
+      --primary-2: #1c5a8c;
+      --accent: #c89b2c;
+      --border: #d9e2ec;
+      --shadow: 0 16px 40px rgba(16, 32, 51, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(200, 155, 44, 0.12), transparent 28%),
+        linear-gradient(180deg, #eef3f8 0%, var(--bg) 100%);
+      min-height: 100vh;
+    }
+    .page { min-height: 100vh; padding: 24px; }
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #0d2d49 100%);
+      color: white;
+      border-radius: 24px;
+      padding: 22px 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 700; }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), #f0d07a);
+      color: #1a1a1a; display: grid; place-items: center; font-weight: 800;
+    }
+    main { max-width: 980px; margin: 24px auto 0; display: grid; gap: 20px; }
+    .hero, .panel, .summary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+    h1, h2, h3 { margin: 0 0 10px; color: var(--primary); }
+    p { margin: 0; color: var(--muted); line-height: 1.6; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .field { display: grid; gap: 8px; }
+    label { font-size: 0.92rem; font-weight: 600; color: #24384f; }
+    .input {
+      min-height: 48px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fff;
+      color: #8794a6;
+    }
+    .full { grid-column: 1 / -1; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .btn, .btn-secondary {
+      padding: 12px 16px; border-radius: 14px; font-weight: 700;
+    }
+    .btn { background: linear-gradient(135deg, var(--primary-2), var(--primary)); color: white; }
+    .btn-secondary { background: #edf3f8; color: var(--primary); border: 1px solid var(--border); }
+    .summary { border-left: 8px solid var(--accent); }
+    .summary strong { color: var(--primary); }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand"><span class="brand-mark">BA</span> Banco Arboleda</div>
+      <div>Transferencia entre mis cuentas</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Pantalla de transferencia</h1>
+        <p>Wireframe equivalente para el traslado de fondos entre cuentas propias, manteniendo una presentación sobria y bancaria.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Datos de la transferencia</h2>
+        <div class="grid">
+          <div class="field">
+            <label>Cuenta origen</label>
+            <div class="input">Cuenta Ahorros 001</div>
+          </div>
+          <div class="field">
+            <label>Cuenta destino</label>
+            <div class="input">Cuenta Corriente 002</div>
+          </div>
+          <div class="field">
+            <label>Monto</label>
+            <div class="input">$120.000</div>
+          </div>
+          <div class="field">
+            <label>Disponible en origen</label>
+            <div class="input">$2.450.000</div>
+          </div>
+          <div class="field full">
+            <label>Detalle</label>
+            <div class="input">Validación de formato, saldo y confirmación antes de procesar.</div>
+          </div>
+        </div>
+        <div class="actions">
+          <div class="btn">Confirmar transferencia</div>
+          <div class="btn-secondary">Cancelar</div>
+        </div>
+      </section>
+
+      <section class="summary">
+        <h2>Confirmación visual</h2>
+        <p><strong>Transferencia entre mis cuentas</strong> representada como prototipo estático con foco en seguridad y claridad operativa.</p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

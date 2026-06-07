@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Banco Arboleda | Login</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --text: #102033;
+      --muted: #66758a;
+      --primary: #113b63;
+      --primary-2: #1c5a8c;
+      --accent: #c89b2c;
+      --border: #d9e2ec;
+      --shadow: 0 16px 40px rgba(16, 32, 51, 0.12);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(200, 155, 44, 0.12), transparent 28%),
+        linear-gradient(180deg, #eef3f8 0%, var(--bg) 100%);
+      min-height: 100vh;
+    }
+    .shell {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 16px;
+    }
+    .card {
+      width: min(980px, 100%);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .hero {
+      padding: 40px;
+      background: linear-gradient(135deg, var(--primary) 0%, #0d2d49 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 480px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), #f0d07a);
+      color: #1a1a1a;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.08;
+    }
+    .hero p {
+      margin: 12px 0 0;
+      max-width: 34ch;
+      color: rgba(255,255,255,0.84);
+      font-size: 1.03rem;
+      line-height: 1.6;
+    }
+    .hero-note {
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.9);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .form-area {
+      padding: 40px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+    }
+    .panel-title {
+      margin: 0 0 8px;
+      font-size: 1.45rem;
+      color: var(--primary);
+    }
+    .panel-subtitle {
+      margin: 0 0 28px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .field {
+      margin-bottom: 16px;
+    }
+    label {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #24384f;
+    }
+    input {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font: inherit;
+      background: #fff;
+      outline: none;
+    }
+    input:focus {
+      border-color: var(--primary-2);
+      box-shadow: 0 0 0 4px rgba(28, 90, 140, 0.12);
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin: 16px 0 24px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, var(--primary-2), var(--primary));
+      color: white;
+      font: inherit;
+      font-weight: 700;
+      cursor: default;
+      box-shadow: 0 12px 24px rgba(17, 59, 99, 0.22);
+    }
+    .footer-note {
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    @media (max-width: 860px) {
+      .card { grid-template-columns: 1fr; }
+      .hero, .form-area { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card" aria-label="Prototipo de inicio de sesión">
+      <aside class="hero">
+        <div>
+          <div class="brand"><span class="brand-mark">BA</span> Banco Arboleda</div>
+          <h1>Acceso seguro a tus operaciones bancarias</h1>
+          <p>Wireframe de baja/media fidelidad para la pantalla de inicio de sesión del Caso Banco Arboleda.</p>
+        </div>
+        <div class="hero-note">Este prototipo solo representa la disposición visual. No contiene lógica funcional ni validación real.</div>
+      </aside>
+      <section class="form-area">
+        <h2 class="panel-title">Iniciar sesión</h2>
+        <p class="panel-subtitle">Ingresa tus credenciales para continuar al módulo principal.</p>
+        <div class="field">
+          <label for="usuario">Usuario o correo electrónico</label>
+          <input id="usuario" type="text" placeholder="nombre@correo.com" />
+        </div>
+        <div class="field">
+          <label for="clave">Contraseña</label>
+          <input id="clave" type="password" placeholder="••••••••" />
+        </div>
+        <div class="row">
+          <span>¿Olvidaste tu contraseña?</span>
+          <span>Soporte disponible</span>
+        </div>
+        <button class="btn" type="button">Ingresar</button>
+        <p class="footer-note">Banco Arboleda | Prototipo estático de interfaz</p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

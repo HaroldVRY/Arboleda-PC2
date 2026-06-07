@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Banco Arboleda | Principal</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --text: #102033;
+      --muted: #66758a;
+      --primary: #113b63;
+      --primary-2: #1c5a8c;
+      --accent: #c89b2c;
+      --border: #d9e2ec;
+      --shadow: 0 16px 40px rgba(16, 32, 51, 0.12);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(28, 90, 140, 0.1), transparent 28%),
+        linear-gradient(180deg, #eef3f8 0%, var(--bg) 100%);
+      min-height: 100vh;
+    }
+    .page {
+      min-height: 100vh;
+      padding: 24px;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #0d2d49 100%);
+      color: white;
+      border-radius: 24px;
+      padding: 22px 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), #f0d07a);
+      color: #1a1a1a;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+    .header-meta {
+      color: rgba(255,255,255,0.86);
+      font-size: 0.95rem;
+    }
+    main {
+      max-width: 1160px;
+      margin: 24px auto 0;
+    }
+    .hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+    .hero h1 {
+      margin: 0 0 8px;
+      color: var(--primary);
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+    }
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 70ch;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 1.25rem;
+      color: var(--primary);
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .card .tag {
+      align-self: flex-start;
+      margin-bottom: 16px;
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(28, 90, 140, 0.08);
+      color: var(--primary-2);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+    .cta {
+      margin-top: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary-2), var(--primary));
+      color: white;
+      font-weight: 700;
+    }
+    .note {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    @media (max-width: 980px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand"><span class="brand-mark">BA</span> Banco Arboleda</div>
+      <div class="header-meta">Pantalla principal del cliente autenticado</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Selecciona una operación</h1>
+        <p>Wireframe de la pantalla principal con acceso rápido a las tres funcionalidades definidas en el caso: Recarga celular, Pago de Servicio y Transferencia entre mis cuentas.</p>
+      </section>
+
+      <section class="cards" aria-label="Opciones principales">
+        <article class="card">
+          <div>
+            <span class="tag">Operación 01</span>
+            <h2>Recarga celular</h2>
+            <p>Envía saldo a un número móvil mediante el flujo de cinco pasos definido por el negocio.</p>
+          </div>
+          <div class="cta">Abrir recarga</div>
+        </article>
+
+        <article class="card">
+          <div>
+            <span class="tag">Operación 02</span>
+            <h2>Pago de Servicio</h2>
+            <p>Realiza el pago de un servicio desde la cuenta del cliente con validación previa de datos.</p>
+          </div>
+          <div class="cta">Abrir pago</div>
+        </article>
+
+        <article class="card">
+          <div>
+            <span class="tag">Operación 03</span>
+            <h2>Transferencia entre mis cuentas</h2>
+            <p>Traslada fondos entre cuentas propias con una interfaz simple y segura.</p>
+          </div>
+          <div class="cta">Abrir transferencia</div>
+        </article>
+      </section>
+
+      <p class="note">Banco Arboleda | Prototipo estático de interfaz</p>
+    </main>
+  </div>
+</body>
+</html>

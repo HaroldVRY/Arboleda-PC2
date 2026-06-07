@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Banco Arboleda | Recarga celular</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --text: #102033;
+      --muted: #66758a;
+      --primary: #113b63;
+      --primary-2: #1c5a8c;
+      --accent: #c89b2c;
+      --border: #d9e2ec;
+      --shadow: 0 16px 40px rgba(16, 32, 51, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(200, 155, 44, 0.12), transparent 28%),
+        linear-gradient(180deg, #eef3f8 0%, var(--bg) 100%);
+      min-height: 100vh;
+    }
+    .page {
+      min-height: 100vh;
+      padding: 24px;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #0d2d49 100%);
+      color: white;
+      border-radius: 24px;
+      padding: 22px 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), #f0d07a);
+      color: #1a1a1a;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+    main {
+      max-width: 1160px;
+      margin: 24px auto 0;
+      display: grid;
+      gap: 20px;
+    }
+    .hero,
+    .panel,
+    .success {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .hero {
+      padding: 28px;
+    }
+    .hero h1,
+    .panel h2,
+    .success h2 {
+      margin: 0 0 8px;
+      color: var(--primary);
+    }
+    .hero p,
+    .panel p,
+    .success p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .steps {
+      display: grid;
+      gap: 14px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: linear-gradient(180deg, #fff 0%, #fbfcfe 100%);
+    }
+    .num {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary-2), var(--primary));
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+    .step h3 {
+      margin: 0 0 6px;
+      font-size: 1.08rem;
+      color: #17314e;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+    label {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #24384f;
+    }
+    .input {
+      min-height: 48px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fff;
+      color: #8794a6;
+    }
+    .full { grid-column: 1 / -1; }
+    .btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .btn,
+    .btn-secondary {
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 700;
+    }
+    .btn {
+      background: linear-gradient(135deg, var(--primary-2), var(--primary));
+      color: white;
+    }
+    .btn-secondary {
+      background: #edf3f8;
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+    .panel,
+    .success {
+      padding: 24px;
+    }
+    .success {
+      border-left: 8px solid var(--accent);
+    }
+    .success strong { color: var(--primary); }
+    .footer-note {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    @media (max-width: 800px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .step { grid-template-columns: 1fr; }
+      .num { width: 46px; height: 46px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand"><span class="brand-mark">BA</span> Banco Arboleda</div>
+      <div>Flujo de recarga celular</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Recarga celular</h1>
+        <p>Wireframe del flujo con los cinco pasos solicitados en el enunciado, incluyendo validación de la clave online y mensaje de éxito final.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Pasos de la operación</h2>
+        <div class="steps">
+          <article class="step">
+            <div class="num">1</div>
+            <div>
+              <h3>Digitar número de celular</h3>
+              <p>El cliente ingresa el número móvil destino de la recarga.</p>
+              <div class="form-grid">
+                <div class="field full">
+                  <label>Número de celular</label>
+                  <div class="input">300 123 4567</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">2</div>
+            <div>
+              <h3>Seleccionar operador</h3>
+              <p>El cliente elige el operador correspondiente al número ingresado.</p>
+              <div class="form-grid">
+                <div class="field">
+                  <label>Operador</label>
+                  <div class="input">Movistar</div>
+                </div>
+                <div class="field">
+                  <label>Referencia visual</label>
+                  <div class="input">Lista desplegable</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">3</div>
+            <div>
+              <h3>Seleccionar o digitar monto</h3>
+              <p>La interfaz permite escoger un valor sugerido o escribir un valor personalizado.</p>
+              <div class="form-grid">
+                <div class="field">
+                  <label>Monto sugerido</label>
+                  <div class="input">$10.000</div>
+                </div>
+                <div class="field">
+                  <label>Monto personalizado</label>
+                  <div class="input">$15.000</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">4</div>
+            <div>
+              <h3>Ingresar clave online</h3>
+              <p>Se solicita la clave online como paso de confirmación de la transacción.</p>
+              <div class="form-grid">
+                <div class="field full">
+                  <label>Clave online</label>
+                  <div class="input">••••••</div>
+                </div>
+              </div>
+              <div class="btns">
+                <div class="btn">Confirmar recarga</div>
+                <div class="btn-secondary">Cancelar</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">5</div>
+            <div>
+              <h3>Mensaje de éxito</h3>
+              <p>Si la validación es correcta, se muestra el resultado final de la operación.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="success">
+        <h2>Resultado</h2>
+        <p><strong>Recarga realizada con éxito.</strong></p>
+        <p class="footer-note">Banco Arboleda | Prototipo estático de interfaz</p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
