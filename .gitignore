@@ -1,0 +1,15 @@
+# Dependencies and build outputs
+node_modules/
+dist/
+build/
+coverage/
+.vite/
+
+# Supabase environment files are intentionally versioned for this delivery.
+# Keep backend/.env and frontend/.env in Git on purpose.
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
